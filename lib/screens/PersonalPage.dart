@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/Persona.dart';
+import '../clases/Persona.dart';
 
 class PersonalPage extends StatefulWidget {
   final Persona persona;
@@ -106,9 +106,9 @@ class _PersonalPageState extends State<PersonalPage> {
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2101),
                     );
-                    if (pickedDate != null && pickedDate != _fechaNacimiento) {
+                    if (pickedDate != _fechaNacimiento) {
                       setState(() {
-                        _fechaNacimiento = pickedDate;
+                        _fechaNacimiento = pickedDate!;
                       });
                     }
                   },

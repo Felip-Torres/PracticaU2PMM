@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'PersonalPage.dart';
-import '../models/Persona.dart';
+import '../clases/Persona.dart';
 import 'WidgetPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     _persona = Persona(
       nombre: 'Felip',
       apellidos: 'Torres reines',
-      fechaNacimiento: DateTime(2002, 19, 7),
+      fechaNacimiento: DateTime(2002, 7, 19),
       correoElectronico: 'ftr1500@gmail.com',
       contrasena: '1234',
     );
@@ -35,8 +35,8 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Nombre: ${_persona.nombre}', style: const TextStyle(fontSize: 20)),
-            const SizedBox(height: 20),
+            Text('Nombre: ${_persona.nombre} ${_persona.apellidos} \nNacimiento: ${_persona.fechaNacimiento}\nCorreo: ${_persona.correoElectronico}', style: const TextStyle(fontSize: 20)),
+            const SizedBox(height: 20),//Separacion
             ElevatedButton(
               onPressed: () async {
                 // Navegar a PersonalPage y esperar el objeto Persona actualizado
