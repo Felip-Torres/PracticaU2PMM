@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:video_player/video_player.dart';
 
 class WidgetPage extends StatefulWidget {
   const WidgetPage({super.key});
@@ -13,23 +15,27 @@ class _WidgetPageState extends State<WidgetPage> {
   double _currentSliderValue = 50;
 
   // Controlador del VideoPlayer
-  late YoutubePlayerController _controller;
+  late VideoPlayerController _controller;
+
+  
 
   @override
   void initState() {
+    
     super.initState();
-    _controller = YoutubePlayerController(
-      initialVideoId: 'dQw4w9WgXcQ',
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
+    // Inicialitzem el controlador de vídeo
+    _controller = VideoPlayerController.asset(
+      'lib/Video/video.mp4',
+    )..initialize().then((_) {
+        setState(() {}); // Actualitzem l'estat quan el vídeo estigui llest
+      }).catchError((error) {
+        print('Error al inicializar el video: $error');
+      });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller.dispose(); // Alliberem recursos
     super.dispose();
   }
 
@@ -55,18 +61,12 @@ class _WidgetPageState extends State<WidgetPage> {
             SizedBox(
               width: 400,
               height: 225,
-              child: YoutubePlayer(
-                controller: _controller,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: Colors.blue,
-                progressColors: const ProgressBarColors(
-                  playedColor: Colors.blue,
-                  handleColor: Colors.blueAccent,
-                ),
-                onReady: () {
-                  debugPrint('Player is ready.');
-                },
-              ),
+              child: _controller.value.isInitialized
+                  ? AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: VideoPlayer(_controller),
+                    )
+                  : const Center(child: CircularProgressIndicator()),
             ),
             const SizedBox(height: 20),
 
