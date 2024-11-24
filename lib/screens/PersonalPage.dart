@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../clases/Persona.dart';
 
 class PersonalPage extends StatefulWidget {
@@ -12,29 +13,16 @@ class PersonalPage extends StatefulWidget {
 
 class _PersonalPageState extends State<PersonalPage> {
   final _formKey = GlobalKey<FormState>();
-  late TextEditingController _nombreController;
-  late TextEditingController _apellidosController;
-  late TextEditingController _correoController;
-  late TextEditingController _contrasenaController;
-  late DateTime _fechaNacimiento;
+  late Persona _persona;
 
   @override
   void initState() {
     super.initState();
-    // Inicializamos los controladores con los datos actuales
-    _nombreController = TextEditingController(text: widget.persona.nombre);
-    _apellidosController = TextEditingController(text: widget.persona.apellidos);
-    _correoController = TextEditingController(text: widget.persona.correoElectronico);
-    _contrasenaController = TextEditingController(text: widget.persona.contrasena);
-    _fechaNacimiento = widget.persona.fechaNacimiento;
+    _persona = widget.persona;  // Usamos la instancia de Persona directamente
   }
 
   @override
   void dispose() {
-    _nombreController.dispose();
-    _apellidosController.dispose();
-    _correoController.dispose();
-    _contrasenaController.dispose();
     super.dispose();
   }
 
@@ -52,8 +40,9 @@ class _PersonalPageState extends State<PersonalPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Nombre
                 TextFormField(
-                  controller: _nombreController,
+                  initialValue: _persona.nombre,  // Asignamos directamente el valor
                   decoration: const InputDecoration(labelText: 'Nombre'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -61,9 +50,15 @@ class _PersonalPageState extends State<PersonalPage> {
                     }
                     return null;
                   },
+                  onChanged: (value) {
+                    setState(() {
+                      _persona.nombre = value;  // Actualizamos el valor directamente en la instancia de Persona
+                    });
+                  },
                 ),
+                // Apellidos
                 TextFormField(
-                  controller: _apellidosController,
+                  initialValue: _persona.apellidos,  // Asignamos directamente el valor
                   decoration: const InputDecoration(labelText: 'Apellidos'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -71,9 +66,15 @@ class _PersonalPageState extends State<PersonalPage> {
                     }
                     return null;
                   },
+                  onChanged: (value) {
+                    setState(() {
+                      _persona.apellidos = value;  // Actualizamos el valor directamente en la instancia de Persona
+                    });
+                  },
                 ),
+                // Correo electrónico
                 TextFormField(
-                  controller: _correoController,
+                  initialValue: _persona.correoElectronico,  // Asignamos directamente el valor
                   decoration: const InputDecoration(labelText: 'Correo Electrónico'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -81,9 +82,15 @@ class _PersonalPageState extends State<PersonalPage> {
                     }
                     return null;
                   },
+                  onChanged: (value) {
+                    setState(() {
+                      _persona.correoElectronico = value;  // Actualizamos el valor directamente en la instancia de Persona
+                    });
+                  },
                 ),
+                // Contraseña
                 TextFormField(
-                  controller: _contrasenaController,
+                  initialValue: _persona.contrasena,  // Asignamos directamente el valor
                   obscureText: true,
                   decoration: const InputDecoration(labelText: 'Contraseña'),
                   validator: (value) {
@@ -92,23 +99,28 @@ class _PersonalPageState extends State<PersonalPage> {
                     }
                     return null;
                   },
+                  onChanged: (value) {
+                    setState(() {
+                      _persona.contrasena = value;  // Actualizamos el valor directamente en la instancia de Persona
+                    });
+                  },
                 ),
                 // Fecha de nacimiento
                 ListTile(
                   title: Text(
-                    'Fecha de Nacimiento: ${_fechaNacimiento.toLocal()}'.split(' ')[0],
+                    'Fecha de Nacimiento: ${DateFormat("dd/MM/yyyy").format(_persona.fechaNacimiento)}',
                   ),
                   trailing: const Icon(Icons.calendar_today),
                   onTap: () async {
                     DateTime? pickedDate = await showDatePicker(
                       context: context,
-                      initialDate: _fechaNacimiento,
+                      initialDate: _persona.fechaNacimiento,
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2101),
                     );
-                    if (pickedDate != _fechaNacimiento) {
+                    if (pickedDate != null && pickedDate != _persona.fechaNacimiento) {
                       setState(() {
-                        _fechaNacimiento = pickedDate!;
+                        _persona.fechaNacimiento = pickedDate;  // Actualizamos la fecha en la instancia de Persona
                       });
                     }
                   },
@@ -117,20 +129,11 @@ class _PersonalPageState extends State<PersonalPage> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Crear una nueva persona con los valores modificados
-                      Persona updatedPersona = widget.persona.copyWith(
-                        nombre: _nombreController.text,
-                        apellidos: _apellidosController.text,
-                        correoElectronico: _correoController.text,
-                        contrasena: _contrasenaController.text,
-                        fechaNacimiento: _fechaNacimiento,
-                      );
-
-                      // Enviar de vuelta el objeto actualizado
-                      Navigator.pop(context, updatedPersona);
+                      // Después de validar, retornamos la persona actualizada
+                      Navigator.pop(context, _persona);
                     }
                   },
-                  child: const Text('Desa'),
+                  child: const Text('Guardar'),
                 ),
               ],
             ),

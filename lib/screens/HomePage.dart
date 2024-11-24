@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'PersonalPage.dart';
 import '../clases/Persona.dart';
 import 'WidgetPage.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Nombre: ${_persona.nombre} ${_persona.apellidos} \nNacimiento: ${_persona.fechaNacimiento}\nCorreo: ${_persona.correoElectronico}', style: const TextStyle(fontSize: 20)),
+            Text('Nombre: ${_persona.nombre} ${_persona.apellidos} \nNacimiento: ${DateFormat('dd/MM/yyyy').format(_persona.fechaNacimiento)}\nCorreo: ${_persona.correoElectronico}', style: const TextStyle(fontSize: 20)),
             const SizedBox(height: 20),//Separacion
             ElevatedButton(
               onPressed: () async {
