@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Persona _persona;
 
+  //Inicio la persona con mis datos
   @override
   void initState() {
     super.initState();
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Página Principal'),
+        title: const Text('SPPMM'),
       ),
       body: Center(
         child: Column(

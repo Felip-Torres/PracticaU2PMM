@@ -59,7 +59,7 @@ class _WidgetPageState extends State<WidgetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Página de Widgets'),
+        title: const Text('VideoPlayer'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -100,7 +100,7 @@ class _WidgetPageState extends State<WidgetPage> {
                       onChanged: (value) {
                         _onSliderChanged(value);
                       },
-                      activeColor: Colors.blue,
+                      activeColor: Colors.red,
                       inactiveColor: Colors.grey,
                     ),
                   ),
@@ -112,9 +112,7 @@ class _WidgetPageState extends State<WidgetPage> {
             FloatingActionButton(
               onPressed: () {
                 setState(() {
-                  _controller.value.isPlaying
-                      ? _controller.pause()
-                      : _controller.play();
+                  _controller.value.isPlaying? _controller.pause(): _controller.play();
                 });
               },
               child: Icon(
