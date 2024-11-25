@@ -59,7 +59,7 @@ class _WidgetPageState extends State<WidgetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Página de Widgets'),
+        title: const Text('Video Player'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

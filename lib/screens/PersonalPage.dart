@@ -30,7 +30,7 @@ class _PersonalPageState extends State<PersonalPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar Información Personal'),
+        title: const Text('Torres'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
