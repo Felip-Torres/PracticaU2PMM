@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Persona _persona;
 
+  //Inicio la persona con mis datos
   @override
   void initState() {
     super.initState();

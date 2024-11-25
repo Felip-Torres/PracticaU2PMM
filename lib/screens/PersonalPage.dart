@@ -42,7 +42,7 @@ class _PersonalPageState extends State<PersonalPage> {
               children: [
                 // Nombre
                 TextFormField(
-                  initialValue: _persona.nombre,  // Asignamos directamente el valor
+                  initialValue: _persona.nombre,
                   decoration: const InputDecoration(labelText: 'Nombre'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -52,13 +52,13 @@ class _PersonalPageState extends State<PersonalPage> {
                   },
                   onChanged: (value) {
                     setState(() {
-                      _persona.nombre = value;  // Actualizamos el valor directamente en la instancia de Persona
+                      _persona.nombre = value;
                     });
                   },
                 ),
                 // Apellidos
                 TextFormField(
-                  initialValue: _persona.apellidos,  // Asignamos directamente el valor
+                  initialValue: _persona.apellidos,
                   decoration: const InputDecoration(labelText: 'Apellidos'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -68,13 +68,14 @@ class _PersonalPageState extends State<PersonalPage> {
                   },
                   onChanged: (value) {
                     setState(() {
-                      _persona.apellidos = value;  // Actualizamos el valor directamente en la instancia de Persona
+                      _persona.apellidos = value;
                     });
                   },
                 ),
+
                 // Correo electrónico
                 TextFormField(
-                  initialValue: _persona.correoElectronico,  // Asignamos directamente el valor
+                  initialValue: _persona.correoElectronico,
                   decoration: const InputDecoration(labelText: 'Correo Electrónico'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -84,13 +85,14 @@ class _PersonalPageState extends State<PersonalPage> {
                   },
                   onChanged: (value) {
                     setState(() {
-                      _persona.correoElectronico = value;  // Actualizamos el valor directamente en la instancia de Persona
+                      _persona.correoElectronico = value;
                     });
                   },
                 ),
+
                 // Contraseña
                 TextFormField(
-                  initialValue: _persona.contrasena,  // Asignamos directamente el valor
+                  initialValue: _persona.contrasena,
                   obscureText: true,
                   decoration: const InputDecoration(labelText: 'Contraseña'),
                   validator: (value) {
@@ -101,10 +103,11 @@ class _PersonalPageState extends State<PersonalPage> {
                   },
                   onChanged: (value) {
                     setState(() {
-                      _persona.contrasena = value;  // Actualizamos el valor directamente en la instancia de Persona
+                      _persona.contrasena = value;
                     });
                   },
                 ),
+
                 // Fecha de nacimiento
                 ListTile(
                   title: Text(
@@ -120,12 +123,13 @@ class _PersonalPageState extends State<PersonalPage> {
                     );
                     if (pickedDate != null && pickedDate != _persona.fechaNacimiento) {
                       setState(() {
-                        _persona.fechaNacimiento = pickedDate;  // Actualizamos la fecha en la instancia de Persona
+                        _persona.fechaNacimiento = pickedDate;
                       });
                     }
                   },
                 ),
                 const SizedBox(height: 20),
+                
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
